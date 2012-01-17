@@ -1,0 +1,24 @@
+%table.bordered-table
+  %thead
+    %tr
+      %th
+        Pic
+      %th
+        Display Name
+      %th 
+        Action
+  %tbody
+    - if @channels.count > 0
+      - @channels.each do |channel|
+        %tr
+          %td
+            %img{src: channel.creator.avatar_url, width: "100px", height: "100px"}
+          %td
+            = channel.creator.display_name
+          %td
+            = link_to "Speak Now", resource_path(channel)
+    - else
+      .alert-message.block-message
+        "There is no one out there at the minute"
+
+

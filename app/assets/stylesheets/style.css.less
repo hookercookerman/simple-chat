@@ -1,0 +1,222 @@
+@import "twitter/bootstrap/reset.less";
+
+// Links
+@linkColor:         #0069d6;
+@linkColorHover:    darken(@linkColor, 15);
+
+// Grays
+@black:             #000;
+@grayDark:          lighten(@black, 25%);
+@gray:              lighten(@black, 50%);
+@grayLight:         lighten(@black, 75%);
+@grayLighter:       lighten(@black, 90%);
+@white:             #fff;
+
+// Accent Colors
+@blue:              #049CDB;
+@lightBlue:         lighten(@blue, 50%);
+@blueDark:          #0064CD;
+@green:             #46a546;
+@red:               #9d261d;
+@yellow:            #ffc40d;
+@lightYellow:       lighten(@yellow, 75%);
+@orange:            #f89406;
+@pink:              #c3325f;
+@purple:            #7a43b6;
+
+// Baseline grid
+@basefont:          13px;
+@baseline:          18px;
+
+// Griditude
+// Modify the grid styles in mixins.less
+@gridColumns:       16;
+@gridColumnWidth:   40px;
+@gridGutterWidth:   20px;
+@extraSpace:        (@gridGutterWidth * 2); // For our grid calculations
+@siteWidth:         (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+// Color Scheme
+// Use this to roll your own color schemes if you like (unused by Bootstrap by default)
+@baseColor:         @blue;                  // Set a base color
+@complement:        spin(@baseColor, 180);  // Determine a complementary color
+@split1:            spin(@baseColor, 158);  // Split complements
+@split2:            spin(@baseColor, -158);
+@triad1:            spin(@baseColor, 135);  // Triads colors
+@triad2:            spin(@baseColor, -135);
+@tetra1:            spin(@baseColor, 90);   // Tetra colors
+@tetra2:            spin(@baseColor, -90);
+@analog1:           spin(@baseColor, 22);   // Analogs colors
+@analog2:           spin(@baseColor, -22);
+
+@import "twitter/bootstrap/mixins.less";
+@import "twitter/bootstrap/scaffolding.less";
+@import "twitter/bootstrap/type.less";
+/*@import "twitter/bootstrap/forms.less";*/
+@import "twitter/bootstrap/tables.less";
+@import "twitter/bootstrap/patterns.less";
+
+body {
+  background-color: #eee;
+  padding-top: 40px;
+}
+
+.container > footer p {
+  text-align: center;
+}
+
+#main_content {
+  background-color: #fff;
+  padding: 20px;
+  margin: 0 -20px; 
+  .border-radius(0 0 6px 6px);
+  .box-shadow(0 1px 2px rgba(0,0,0,.15));
+}
+
+#sidebar{
+  .topbar > .fill;
+  padding: 20px;
+  margin: 0 -20px; 
+  .border-radius(0 0 6px 0px);
+  .box-shadow(0 1px 2px rgba(0,0,0,.15));
+}
+
+.page-header {
+  background-color: #f5f5f5;
+  padding: 20px 20px 10px;
+  margin: -20px -20px 20px;
+}
+
+.topbar {
+  .topbar-image{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: top;
+    margin-right: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  h1{
+    margin: 0;
+    line-height: 24px;
+    position: relative;
+    border: 0;
+    a{
+      display: block;
+      float: left; font-size: 3px;
+      line-height: 1;
+      margin-left: -20px;
+      padding: 5px 20px 2px;
+    }
+  }
+  .fill {
+    border-bottom: 5px solid @blue;
+    .box-shadow(0 3px 8px rgba(0,0,0,.3));
+  }
+}
+
+#chat_window{
+  .clearfix;
+  position: fixed;
+  bottom: 0;
+  right: 20px;
+  background-color: @baseColor;
+  overflow: hidden;
+  width: 250px;
+  border-bottom: 3px solid #000;
+  
+  #chat_title{
+    border-bottom: 1px solid #fff;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    h2{
+      padding: 0;
+      letter-spacing: 0;
+      color: #fff;
+    }
+  }
+  .active{
+    h2{
+      background-position: right bottom !important;
+    }
+  }
+      
+  #chat_container{
+    display: none;
+    color: #fff;
+  }
+    
+  #chat_messages{
+    overflow: auto;
+    border-bottom: 1px solid #fff;
+    margin: 0px;
+    margin-top: -1px;
+    margin-bottom: 10px;
+    max-height: 300px;
+    position: relative;
+    z-index: 1;
+    
+    li.message{
+      font-weight: bold;
+      color: #fff;
+      padding: 10px;
+      border-color: #fff;      
+      .display_name{
+        .clearfix;
+        vertical-align: middle;
+      }
+      .notice{
+        color: #fff;
+      }
+          
+      .body{
+        .border-radius(9px);
+        padding: 9px;
+        background-color: @grayLight;
+        color: @black;
+      }
+        
+      .received{
+        .body{
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
+  form{
+    position: relative;
+    z-index: 3;
+    background-color: @blue;
+    textarea{
+      margin: 0;
+      padding: 10px;
+      border: 0;
+      .border-radius(9px);
+      background-color: #fff;
+      border: 1px solid #fff;
+      width: 200px;
+      height: 50px;
+      margin: 0 auto;
+      display: block;
+      resize: none;
+      &:focus{
+        border-color: @gray;
+      } 
+    }
+    input.button{
+      background-color: @grayLight;
+      display: block;
+      margin-left: 10px;
+      margin-top: 10px;
+      /*margin-left: auto;*/
+      /*margin-right: auto;*/
+      &:hover{
+        background-color: @green;
+      }
+    }
+  }
+}

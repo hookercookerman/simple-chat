@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    = render :partial => "layouts/head"
+  %body{:id => @body_id}
+    #header
+      = render :partial => "layouts/top_bar"
+    .container        
+      .content
+        = yield 
+      = render :partial => "/shared/chat"
+      #footer
+        = render :partial => "layouts/footer"
+
+    = javascript_include_tag :application
+    = yield :extra_js

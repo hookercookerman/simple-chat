@@ -1,0 +1,22 @@
+- content_for :extra_js do
+  - if Rails.env.test?
+    :javascript
+      window.ALLOW_PUSHER_OVERRIDE = true;
+    = javascript_include_tag "chat/pusher-test-stub"
+
+:javascript
+  var PUSHER_KEY = '#{Pusher.key}'
+
+#chat_window.admin
+  #chat_title
+    %h2 
+      = resource.creator.display_name
+
+  #chat_container{:style => signed_in? ? "display: block" : ""}
+    #admin_chat{:"data-channel_name" => resource.name}
+      %ul#chat_messages
+      
+      = simple_form_for Chat::Message.new, :as => :message, :url => admin_chat_active_channel_messages_path(resource), :remote => true do |form|
+        = form.input :body, :as => :text, :input_html => {:class => "create_message_body"}, :label => false, :required =>  false
+        = form.button :submit, "Send", :class => "btn"
+

@@ -1,0 +1,11 @@
+development:
+  host: localhost
+  database: simple_chat_development
+
+test:
+  host: localhost
+  database: simple_chat_test
+
+# set these environment variables on your prod server
+production:
+  uri: <%= ENV['MONGOHQ_URL'] %>

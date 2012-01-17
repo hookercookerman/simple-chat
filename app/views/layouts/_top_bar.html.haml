@@ -1,0 +1,19 @@
+.topbar{:"data-dropdown" => "dropdown"}
+  .fill
+    .container
+      %h3
+        = link_to "Simple Chat", root_path, :class => "brand"
+      %ul.nav
+        %li{:class => controller_name == "home" ? "active" : ""}
+          = link_to "Home", root_path
+        - if signed_in?
+          %li{:class => controller_name == "users" ? "active" : ""}
+            = link_to "Logout", destroy_user_session_path, :method => :delete
+        - else
+          %li{:class => controller_name == "users" ? "active" : ""}
+            = link_to "Login", new_user_session_path
+        - if signed_in? && current_user.admin?
+          %li{:class => controller_name == "active_channels" ? "active" : ""}
+            = link_to "Admin (where you talk to other dudes)", admin_chat_active_channels_path
+
+

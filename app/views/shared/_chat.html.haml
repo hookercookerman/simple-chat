@@ -1,0 +1,33 @@
+- content_for :extra_js do
+  - if Rails.env.test?
+    :javascript
+      window.ALLOW_PUSHER_OVERRIDE = true;
+    = javascript_include_tag "pusher.test_stub"
+
+:javascript
+  var PUSHER_KEY = '#{Pusher.key}'
+  
+#chat_window
+  #chat_title
+    %h2 
+      Simple Chat
+  #chat_container{:style => signed_in? ? "display: block" : ""}
+
+    - if !signed_in?
+      #offline_message
+        %p
+          This is the chat man
+        %p You must sign up to chat
+        = link_to "Signup Now&rarr;".html_safe, new_user_registration_path, :class => "jump btn"
+    - else
+      #chat{:"data-channel_name" => current_user.chat_channel.name}
+        %ul#chat_messages
+          %li.message.notice#no_one_there
+            There is now one to talk to you can always open another browser window
+            and talk to yourself I know I do
+
+        = simple_form_for :message, :url => chat_messages_path, :remote => true, :html => {:id => "new_message"} do |form|
+          = form.input :body, :as => :text, :required => false, :label => false
+          = form.button :submit, "Send", :class => "button btn"
+
+

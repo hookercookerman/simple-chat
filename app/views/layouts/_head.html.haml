@@ -1,0 +1,10 @@
+%title= yield(:title) || "Untitled"
+%meta{:charset => "utf-8"}
+= stylesheet_link_tag "application"
+/[if lt IE 9]
+  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+= javascript_include_tag "modernizr"
+= csrf_meta_tag
+= yield(:head)
+
+
